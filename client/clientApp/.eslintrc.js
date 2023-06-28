@@ -1,0 +1,156 @@
+module.exports = {
+    root: true,
+    ignorePatterns: ['**/node_modules/**/*', '*.d.ts'],
+    parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint', '@angular-eslint'],
+    overrides: [
+        {
+            files: ['*.ts'],
+            parserOptions: {
+                project: ['./tsconfig.app.json'],
+                createDefaultProgram: true,
+            },
+            extends: [
+                // This is required if you use inline templates in Components
+                // "plugin:@angular-eslint/template/process-inline-templates",
+                'eslint:recommended',
+                'plugin:@typescript-eslint/recommended',
+                'plugin:@typescript-eslint/recommended-requiring-type-checking',
+                'plugin:@angular-eslint/recommended',
+                'plugin:prettier/recommended',
+                'prettier/prettier',
+            ],
+            rules: {
+                'keyword-spacing': [
+                    'error',
+                    {
+                        before: true,
+                        after: true,
+                    },
+                ],
+                'linebreak-style': 'off',
+                'no-underscore-dangle': 'off',
+                'no-void': 'error',
+                eqeqeq: [
+                    'error',
+                    'always',
+                    {
+                        null: 'ignore',
+                    },
+                ],
+                'array-bracket-newline': ['error', 'consistent'],
+                'comma-dangle': ['error', 'always-multiline'],
+                'comma-spacing': [
+                    'error',
+                    {
+                        before: false,
+                        after: true,
+                    },
+                ],
+                'comma-style': ['error', 'last'],
+                'computed-property-spacing': ['error', 'never'],
+                'function-call-argument-newline': ['error', 'consistent'],
+                'key-spacing': [
+                    'error',
+                    {
+                        beforeColon: false,
+                        afterColon: true,
+                        mode: 'strict',
+                    },
+                ],
+                'no-lonely-if': 'error',
+                'no-multiple-empty-lines': 'error',
+                'no-trailing-spaces': 'error',
+                'no-unneeded-ternary': 'error',
+                'object-curly-spacing': ['error', 'always'],
+                'no-whitespace-before-property': 'error',
+                'arrow-body-style': ['error', 'as-needed'],
+                'arrow-spacing': 'error',
+                'no-confusing-arrow': 'error',
+                /**
+                 * Any TypeScript source code (NOT TEMPLATE) related rules you wish to use/reconfigure over and above the
+                 * recommended set provided by the @angular-eslint project would go here.
+                 */
+                '@angular-eslint/directive-selector': [
+                    'error',
+                    {
+                        type: 'attribute',
+                        prefix: 'app',
+                        style: 'camelCase',
+                    },
+                ],
+                '@angular-eslint/component-selector': [
+                    'error',
+                    {
+                        type: 'element',
+                        prefix: 'app',
+                        style: 'kebab-case',
+                    },
+                ],
+                '@angular-eslint/no-input-rename': 'off',
+                '@angular-eslint/no-output-rename': 'off',
+                '@typescript-eslint/member-ordering': 'off',
+                '@typescript-eslint/no-explicit-any': 'off',
+                '@typescript-eslint/restrict-template-expressions': 'off',
+                '@typescript-eslint/no-unsafe-return': 'off',
+                '@typescript-eslint/no-unsafe-assignment': 'off',
+                '@typescript-eslint/explicit-module-boundary-types': [
+                    'error',
+                    {
+                        allowArgumentsExplicitlyTypedAsAny: true,
+                    },
+                ],
+                '@typescript-eslint/ban-ts-comment': 'off',
+                '@typescript-eslint/no-empty-function': 'off',
+                '@angular-eslint/no-empty-lifecycle-method': 'off',
+                '@typescript-eslint/no-unsafe-member-access': 'off',
+                '@typescript-eslint/no-unsafe-call': 'off',
+                '@typescript-eslint/unbound-method': 'off',
+                '@typescript-eslint/no-floating-promises': 'off',
+                '@typescript-eslint/no-unused-vars': 'error',
+                '@typescript-eslint/explicit-member-accessibility': 'off',
+                '@typescript-eslint/no-non-null-assertion': 'off',
+            },
+        },
+        {
+            files: ['*.html'],
+            parserOptions: {
+                project: ['tsconfig.app.json'],
+                createDefaultProgram: true,
+            },
+            extends: ['plugin:@angular-eslint/recommended', 'plugin:prettier/recommended'],
+            rules: {},
+        },
+        {
+            files: ['src/**/*.spec.ts'],
+            parserOptions: {
+                project: ['tsconfig.spec.json'],
+            },
+            extends: ['plugin:jasmine/recommended'],
+            plugins: ['jasmine'],
+            env: {
+                jasmine: true,
+            },
+            rules: {
+                'no-void': 'error',
+                '@typescript-eslint/no-unused-vars': 'off',
+                'jasmine/no-spec-dupes': 'off',
+                'jasmine/no-unsafe-spy': 'off',
+                'jasmine/no-suite-dupes': 'off',
+                '@typescript-eslint/no-floating-promises': 'off',
+                'jasmine/no-expect-in-setup-teardown': 'off',
+                'jasmine/expect-single-argument': 'off',
+            },
+        },
+        {
+            files: ['*.html'],
+            extends: ['plugin:@angular-eslint/template/recommended'],
+            rules: {
+                /**
+                 * Any template/HTML related rules you wish to use/reconfigure over and above the
+                 * recommended set provided by the @angular-eslint project would go here.
+                 */
+            },
+        },
+    ],
+};
