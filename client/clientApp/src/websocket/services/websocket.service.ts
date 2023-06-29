@@ -133,14 +133,10 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
   }
 
   public on<T>(event: string): Observable<T> {
-    if (event) {
-      return this.wsMessages$.pipe(
-        filter((message: IWsMessage<T>) => message.event === event),
-        map((message: IWsMessage<T>) => message.data)
-      );
-    } else {
-      return of({} as T);
-    }
+    return this.wsMessages$.pipe(
+      filter((message: IWsMessage<T>) => message.event === event),
+      map((message: IWsMessage<T>) => message.data)
+    );
   }
 
   public send(event: string, data: any = {}): void {
