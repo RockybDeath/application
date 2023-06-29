@@ -1,4 +1,5 @@
-const WebSocketServer = require('ws').Server;
+import {WebSocketServer} from "ws";
+
 const wss = new WebSocketServer({ port: 6759 });
 
 const messages = [
@@ -35,7 +36,7 @@ wss.on('connection', (ws) => {
         const res = JSON.parse(data);
 
         switch (res.event) {
-            case 'set-text':
+            case 'send-text':
                 texts.unshift(res.data);
 
                 break;

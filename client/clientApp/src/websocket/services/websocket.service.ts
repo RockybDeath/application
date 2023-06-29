@@ -5,13 +5,11 @@ import {
   Subject,
   Observer,
   interval,
-  of,
+  tap,
 } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { WebSocketSubject, WebSocketSubjectConfig } from 'rxjs/webSocket';
-
 import { share, distinctUntilChanged, takeWhile } from 'rxjs/operators';
-
 import { IWebsocketService } from '../models/websocket-service.interface';
 import { IWsMessage } from '../models/websocket-message.interface';
 import { WebSocketConfig } from '../models/websocket-config';
@@ -135,13 +133,15 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
   public on<T>(event: string): Observable<T> {
     return this.wsMessages$.pipe(
       filter((message: IWsMessage<T>) => message.event === event),
-      map((message: IWsMessage<T>) => message.data)
+      map((message: IWsMessage<T>) => message.data),
+      tap((data) => console.log(data))
     );
   }
 
   public send(event: string, data: any = {}): void {
     if (event && this.isConnected) {
-      this.websocket$!.next({ event, data } as IWsMessage<any>);
+      const sendData = JSON.stringify({ event, data });
+      this.websocket$!.next(sendData as unknown as IWsMessage<any>);
     } else {
       console.error('Send error!');
     }
